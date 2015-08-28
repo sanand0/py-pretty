@@ -3,15 +3,18 @@
 from distutils.core import setup
 
 setup(
-    name        = 'py-pretty',
-    version     = '1',
-    description = 'Formats dates, numbers, etc. in a pretty, human readable format.',
-    author      = 'S Anand',
-    author_email= 'sanand@s-anand.net',
-    url         = 'http://code.google.com/p/py-pretty/',
-    packages    = ['pretty'],
-    requires    = ['datetime'],
-    long_description = '''Sample code::
+    name='py-pretty',
+    version='1',
+    description='Formats dates, numbers, etc. in a pretty, '
+                'human readable format.',
+    author='S Anand',
+    author_email='sanand@s-anand.net',
+    maintainer='Hark',
+    maintainer_email='github@harkonen.net',
+    url='http://code.google.com/p/py-pretty/',
+    packages=['pretty'],
+    requires=[],
+    long_description='''Sample code::
 
     from datetime import datetime, timedelta
     now = datetime.now()
