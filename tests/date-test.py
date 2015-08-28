@@ -7,8 +7,14 @@ sys.path.append(os.path.split(os.path.split(__file__)[0])[0]) # Add the parent d
 import pretty
 from datetime import datetime, timedelta
 
-# days ago, short
+from freezegun import freeze_time
+
 now = datetime.now()
+
+freezer = freeze_time(now)
+
+freezer.start()
+# day  ago, short
 assert pretty.date(now                      , asdays=True, short=True) == 'today'
 assert pretty.date(now - timedelta(days=  1), asdays=True, short=True) == 'yest'
 assert pretty.date(now - timedelta(days=  2), asdays=True, short=True) == '2d ago'
@@ -21,7 +27,6 @@ assert pretty.date(now - timedelta(days=200), asdays=True, short=True) == '7mo a
 assert pretty.date(now - timedelta(days=500), asdays=True, short=True) == '1y ago'
 
 # in days, short
-now = datetime.now()
 assert pretty.date(now                      , asdays=True, short=True) == 'today'
 assert pretty.date(now + timedelta(days=  1), asdays=True, short=True) == 'tom'
 assert pretty.date(now + timedelta(days=  2), asdays=True, short=True) == 'in 2d'
@@ -34,7 +39,6 @@ assert pretty.date(now + timedelta(days=200), asdays=True, short=True) == 'in 7m
 assert pretty.date(now + timedelta(days=500), asdays=True, short=True) == 'in 1y'
 
 # seconds ago, short
-now = datetime.now()
 assert pretty.date(now                           , asdays=False, short=True) == 'now'
 assert pretty.date(now - timedelta(seconds=   10), asdays=False, short=True) == '10s ago'
 assert pretty.date(now - timedelta(seconds=   20), asdays=False, short=True) == '20s ago'
@@ -50,7 +54,6 @@ assert pretty.date(now - timedelta(seconds=20000), asdays=False, short=True) == 
 assert pretty.date(now - timedelta(seconds=50000), asdays=False, short=True) == '14h ago'
 
 # in seconds, short
-now = datetime.now()
 assert pretty.date(now                           , asdays=False, short=True) == 'now'
 assert pretty.date(now + timedelta(seconds=   10), asdays=False, short=True) == 'in 10s'
 assert pretty.date(now + timedelta(seconds=   20), asdays=False, short=True) == 'in 20s'
@@ -68,7 +71,6 @@ assert pretty.date(now + timedelta(seconds=50000), asdays=False, short=True) == 
 
 
 # days ago, long
-now = datetime.now()
 assert pretty.date(now                       , asdays=True, short=False) == 'today'
 assert pretty.date(now - timedelta(days=   1), asdays=True, short=False) == 'yesterday'
 assert pretty.date(now - timedelta(days=   2), asdays=True, short=False) == 'day before'
@@ -82,7 +84,6 @@ assert pretty.date(now - timedelta(days= 500), asdays=True, short=False) == 'las
 assert pretty.date(now - timedelta(days=1000), asdays=True, short=False) == '3 years ago'
 
 # in days, long
-now = datetime.now()
 assert pretty.date(now                       , asdays=True, short=False) == 'today'
 assert pretty.date(now + timedelta(days=   1), asdays=True, short=False) == 'tomorrow'
 assert pretty.date(now + timedelta(days=   2), asdays=True, short=False) == 'day after'
@@ -96,7 +97,6 @@ assert pretty.date(now + timedelta(days= 500), asdays=True, short=False) == 'nex
 assert pretty.date(now + timedelta(days=1000), asdays=True, short=False) == 'in 3 years'
 
 # seconds ago, long
-now = datetime.now()
 assert pretty.date(now                           , asdays=False, short=False) == 'now'
 assert pretty.date(now - timedelta(seconds=   10), asdays=False, short=False) == '10 seconds ago'
 assert pretty.date(now - timedelta(seconds=   20), asdays=False, short=False) == '20 seconds ago'
@@ -112,7 +112,6 @@ assert pretty.date(now - timedelta(seconds=20000), asdays=False, short=False) ==
 assert pretty.date(now - timedelta(seconds=50000), asdays=False, short=False) == '14 hours ago'
 
 # in seconds, long
-now = datetime.now()
 assert pretty.date(now                           , asdays=False, short=False) == 'now'
 assert pretty.date(now + timedelta(seconds=   10), asdays=False, short=False) == 'in 10 seconds'
 assert pretty.date(now + timedelta(seconds=   20), asdays=False, short=False) == 'in 20 seconds'
@@ -126,5 +125,7 @@ assert pretty.date(now + timedelta(seconds= 5000), asdays=False, short=False) ==
 assert pretty.date(now + timedelta(seconds=10000), asdays=False, short=False) == 'in 3 hours'
 assert pretty.date(now + timedelta(seconds=20000), asdays=False, short=False) == 'in 6 hours'
 assert pretty.date(now + timedelta(seconds=50000), asdays=False, short=False) == 'in 14 hours'
+
+freezer.stop()
 
 print('No errors')
