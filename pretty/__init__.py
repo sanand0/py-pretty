@@ -3,6 +3,8 @@ pretty
 
 Formats dates, numbers, etc. in a pretty, human readable format.
 """
+from __future__ import division
+
 __author__ = "S Anand (sanand@s-anand.net)"
 __copyright__ = "Copyright 2010, S Anand"
 __license__ = "WTFPL"
@@ -10,8 +12,8 @@ __license__ = "WTFPL"
 from datetime import datetime
 
 def _df(seconds, denominator=1, text='', past=True):
-    if past:   return         str((seconds + denominator/2)/ denominator) + text + ' ago'
-    else:      return 'in ' + str((seconds + denominator/2)/ denominator) + text
+    if past:   return         str((seconds + denominator//2)// denominator) + text + ' ago'
+    else:      return 'in ' + str((seconds + denominator//2)// denominator) + text
 
 def date(time=False, asdays=False, short=False):
     '''Returns a pretty formatted date.

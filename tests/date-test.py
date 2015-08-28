@@ -1,4 +1,5 @@
 '''Remember: This may fail because of a few microseconds. Run again and try.'''
+from __future__ import print_function
 
 import sys, os.path
 sys.path.append(os.path.split(os.path.split(__file__)[0])[0]) # Add the parent directory as the root package for the pretty package
@@ -126,4 +127,4 @@ assert pretty.date(now + timedelta(seconds=10000), asdays=False, short=False) ==
 assert pretty.date(now + timedelta(seconds=20000), asdays=False, short=False) == 'in 6 hours'
 assert pretty.date(now + timedelta(seconds=50000), asdays=False, short=False) == 'in 14 hours'
 
-print 'No errors'
+print('No errors')
